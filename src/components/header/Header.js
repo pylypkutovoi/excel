@@ -3,7 +3,7 @@ import {ExcelComponent} from '@core/ExcelComponent';
 export class Header extends ExcelComponent {
   static className = 'excel__header';
 
-  toHtml() {
+  toHTML() {
     return `      
       <input class="input" type="text" value="New table">
       <div>

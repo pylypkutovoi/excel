@@ -8,7 +8,7 @@ export class Formula extends ExcelComponent {
       listeners: ['input', 'click']
     });
   }
-  toHtml() {
+  toHTML() {
     return `
       <div class="info">fx</div>
       <div class="input" contenteditable="true" spellcheck="false"></div>
