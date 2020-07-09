@@ -8,9 +8,11 @@ import {$} from '@core/dom';
 export class Table extends ExcelComponent {
   static className = 'excel__table';
   rowsCount = 25;
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
-      listeners: ['mousedown', 'keydown']
+      name: 'Table',
+      listeners: ['mousedown', 'keydown'],
+      ...options
     });
   }
 
@@ -26,6 +28,10 @@ export class Table extends ExcelComponent {
     super.init();
     const $cell = this.$root.find('[data-id="0:0"]');
     this.selection.select($cell);
+
+    this.emitter.subscribe('its working', data => {
+      this.selection.current.text(data);
+    });
   }
 
   onMousedown(event) {
@@ -34,7 +40,6 @@ export class Table extends ExcelComponent {
     } else if (isCell(event)) {
       const $target = $(event.target);
       if (event.shiftKey) {
-        console.log(this.selection.current);
         const $cells = matrix($target, this.selection.current)
             .map(id => this.$root.find(`[data-id="${id}"]`));
         this.selection.selectGroup($cells);
