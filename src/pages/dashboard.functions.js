@@ -1,8 +1,15 @@
+import {storage} from '@core/utils';
+
 export function toHTML(key) {
+  const model = storage(key);
+  const id = key.split(':')[1];
   return `
     <li class="db__record">
-      <a href="">Table #1</a>
-      <strong>24.06.2020</strong>
+      <a href="#excel/${id}">${model.title}</a>
+      <strong>
+        ${new Date(model.createdDate).toLocaleDateString()}
+        ${new Date(model.createdDate).toLocaleTimeString()}
+      </strong>
     </li>
   `;
 }
@@ -28,7 +35,7 @@ export function createRecordsTable() {
   return `
     <div class="db__list-header">
       <span>Name</span>
-      <span>Date</span>
+      <span>Last opened date</span>
     </div>
   
     <ul class="db__list">
